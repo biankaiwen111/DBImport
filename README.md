@@ -3,8 +3,7 @@
 
 ## Information
 
-This tool/prject is import json file class info fetch from De Anza College / Foothill College portal
-to MongoDB database.
+The purpose of this tool/prject is to store course information which are fetched from De Anza College / Foothill College portal into MongoDB database.
 
 ## Requirements
 
@@ -14,7 +13,7 @@ npm v6.9.0 or above
 
 ## Install
 
-Suggestion: use your virtual environment as you with such as conda, virtualenv...etc
+Suggestion: use virtual environment such as conda, virtualenv...etc
 
 do the following:
 
@@ -24,11 +23,11 @@ pip install -r requirements.txt
 
 ## Usage(@todo)
 
-Activate your virtual environment if you have. Usually the command is `activate virtural_name`
+Activate virtual environment if you have one. Usually the command is `activate virtural_name`
 
 ## Development (@todo)
 
-Suggestion: use your virtual environment as you with such as conda, virtualenv...etc
+Suggestion: use virtual environment such as conda, virtualenv...etc
 
 do the following:
 
@@ -37,32 +36,27 @@ npm install
 pip install -r requirements.txt
 ```
   
-We require all contributors to write docstring for other contributors so the codes are easy to follow. 
+We require all contributors to write docstring so the codes are easy to follow for other contributors. 
 One of the software development processes is Test-driven Development(TDD). We highly recommended you *write at least one test before code*  
-However, the test is not required but recommended.  
+However, the test is recommended but not required.  
 The philosophy is **you must know exactly the detailed behavior of your code does**.  
 
 We use [pytest](https://docs.pytest.org/) to test our code.  
 We use [pydocstring](http://pydocstyle.org/) to test our docstring.  
-We use [autopep8](https://github.com/hhatto/autopep8) to formating our code.  
+We use [autopep8](https://github.com/hhatto/autopep8) to format our code.  
 We use [pylint](https://pylint.org) as Python linter.  
 
 ## Coding Style
 
-In general, we follow [PEP 8](https://www.python.org/dev/peps/pep-0008/) Python coding style and Google pyguide.
+In general, we follow [PEP 8](https://www.python.org/dev/peps/pep-0008/) Python coding style and [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html).
 However, when [PEP 8](https://www.python.org/dev/peps/pep-0008/) is in conflict with [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html), [PEP 8](https://www.python.org/dev/peps/pep-0008/) should be given precedence.
 
 Some special rules:
 
 1. max-line-length: 100
 
-Please also write docstring for contributor easy to follow.
-We follow Google docstring style(https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
-
-Reference:
-
-1. https://www.python.org/dev/peps/pep-0008/
-2. http://google.github.io/styleguide/pyguide.html
+Please also write docstring so the codes are easy to follow for other contributors.
+We follow [Google docstring style](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
 
 ## Project Structure
 
