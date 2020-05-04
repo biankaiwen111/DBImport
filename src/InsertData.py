@@ -79,7 +79,6 @@ def insert_data(course_list, dept_list, quarter_name):
     db = get_db()
     course_collection = db[quarter_name + ' courses']
     dept_collection = db[quarter_name + ' departments']
-
     for course in course_list:
         temp_course = MessageToDict(course)
         course_collection.insert_one(temp_course)
@@ -99,7 +98,6 @@ def main():
     config.read(Path('..') / 'config' / env_config['Config']['Config_File_Name'])
     path = config['locations']['path']
     year = int(config['data_info']['start_year'])
-
     try:
         while config['locations'][str(year)]:
             all_quarters_in_year = config['locations'][str(year)].split(',')
