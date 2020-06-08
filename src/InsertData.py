@@ -52,7 +52,7 @@ def check_file_open(filename):
     if filename:
         with open(filename, 'r') as file:
             return json.load(file)
-    raise FileNotFoundError('File ' + filename + ' is not found!')
+    raise FileNotFoundError('File {filename} is not found!')
 
 
 def insert_data(course_list, dept_list, quarter_name):
