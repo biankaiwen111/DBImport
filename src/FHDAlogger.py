@@ -13,22 +13,12 @@ def initiateLogger(origin, level):
         the logger object
 
     '''
-    level = level.upper()
-    if level == 'INFO':
-        loggerLevel = logging.INFO
-    elif level == 'DEBUG':
-        loggerLevel = logging.DEBUG
-    elif level == 'WARNING':
-        loggerLevel = logging.WARNING
-    elif level == 'ERROR':
-        loggerLevel = logging.ERROR
-    elif level == 'CRITICAL':
-        loggerLevel = logging.CRITICAL
-    else:
-        raise KeyError('Invalid logging level')
 
-    logging.basicConfig(filename = '../log/' + 
+    try:
+        logging.basicConfig(filename = '../log/' + 
                 str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log', 
-                level=loggerLevel, 
+                level=level, 
                 format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    except:
+        raise KeyError("Invalid logger level")
     return logging.getLogger(__name__)
