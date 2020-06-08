@@ -1,7 +1,6 @@
 import sys
 sys.path.append("../src")
 import InsertData
-import pymongo
 import pytest
 
 def test_check_file_open_existence_and_correctness():

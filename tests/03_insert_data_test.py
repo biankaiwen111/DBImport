@@ -4,8 +4,6 @@ from configparser import ConfigParser
 from pathlib import Path
 import InsertData
 import ReadCourseData
-import pymongo
-import pytest
 
 env_config = ConfigParser()
 env_config.read(Path('..') / 'config' / 'setting.config')
