@@ -13,6 +13,7 @@ def initiateLogger(origin, level):
         the logger object
 
     '''
+    level = level.upper()
     if level == 'INFO':
         loggerLevel = logging.INFO
     elif level == 'DEBUG':
