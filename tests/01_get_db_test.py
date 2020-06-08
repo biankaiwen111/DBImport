@@ -2,6 +2,7 @@ import sys
 sys.path.append("../src")
 import InsertData
 import pymongo
+import pytest
 
 def test_get_db_existence():
     """
