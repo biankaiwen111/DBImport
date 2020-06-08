@@ -39,7 +39,15 @@
                "Date": "01/08-03/30",
                "Location": "DA ONLINE",
                "Attribute": "",
-               "Lab Time": []
+               "Lab Time": [
+                  {
+                     "Days": "",
+                     "Time": "TBA",
+                     "Instructor": "Christopher,C,Kwak",
+                     "Date": "06/28-08/07",
+                     "Location": "DA LC107"
+                  }
+               ]
             },
             {
                "CRN": "31138",
