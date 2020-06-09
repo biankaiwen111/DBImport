@@ -22,6 +22,7 @@ def test_read_lab_time_correctness_lab():
     assert temp_course.lab[0].instructor == 'Christopher,C,Kwak'
     assert temp_course.lab[0].location == 'DA LC107'
 
+
 def test_read_lab_time_correctness_nolab():
     """
     Test if read_lab_time() returns the right content

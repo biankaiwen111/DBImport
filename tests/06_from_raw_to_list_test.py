@@ -33,6 +33,7 @@ def test_from_raw_to_list_correctness():
     assert course_list[1].days == department_list[0].courses[1].days == 'ONLINE'
     assert course_list[5].attribute == department_list[1].courses[2].attribute == ''
 
+
 def test_from_raw_to_list_with_invalid_quarter_name():
     """
     Test if from_raw_to_list() throws the right exception if the quarter name is invalid
@@ -41,6 +42,7 @@ def test_from_raw_to_list_with_invalid_quarter_name():
         course_raw = InsertData.check_file_open("test.json")
         quarter_name = 'Invalid quarter name'
         course_list, department_list = ReadCourseData.from_raw_to_list(course_raw, quarter_name)
+
 
 def test_from_raw_to_list_with_invalid_file():
     """
