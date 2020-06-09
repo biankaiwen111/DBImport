@@ -32,4 +32,3 @@ def test_read_lab_time_correctness_nolab():
     temp_course = course.Course()
     temp_course = ReadCourseData.read_lab_time(each_course, temp_course)
     assert len(temp_course.lab) == 0
-

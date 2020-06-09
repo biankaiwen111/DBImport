@@ -18,5 +18,3 @@ def test_check_file_open_not_exist():
     """
 	with pytest.raises(FileNotFoundError):
 		result = InsertData.check_file_open("nonexistent.json")
-
-	
