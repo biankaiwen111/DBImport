@@ -7,9 +7,8 @@ and inserts those data into the desired database
 
 
 import os
-import logging
-import datetime
 import json
+import FHDAlogger
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
 from configparser import ConfigParser
@@ -17,11 +16,7 @@ from pymongo import MongoClient
 from pymongo import errors as mongoerrors
 from pathlib import Path
 
-logging.basicConfig(filename='../log/' +
-                    str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + '.log',
-                    level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
 env_config = ConfigParser()
 env_config.read(Path('..') / 'config' / 'setting.config')
 mongo_config = env_config['MongoDB']
@@ -57,7 +52,7 @@ def check_file_open(filename):
     if filename:
         with open(filename, 'r') as file:
             return json.load(file)
-    raise FileNotFoundError('File', filename, 'is not found!')
+    raise FileNotFoundError('File {filename} is not found!')
 
 
 def insert_data(course_list, dept_list, quarter_name):
@@ -112,9 +107,9 @@ def main():
                 insert_data(course_list, department_list, quarter_name)
             year += 1
     except mongoerrors.PyMongoError:
-        logger.error('Error with MongoDB!')
+        logger.error('MongoDB error has occurred')
     except (FileNotFoundError, KeyError) as err:
-        logger.error(str(err))
+        logger.error(err)
     logger.info('InsertData.py Excecution Finished.')
 
 
