@@ -18,7 +18,11 @@ from pathlib import Path
 
 logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
 env_config = ConfigParser()
-env_config.read(Path('..') / 'config' / 'setting.config')
+curr_path_splitted = str(Path.cwd()).split('/')
+if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
+    env_config.read(Path('..') / 'config' / 'setting.config')
+else:
+    env_config.read(Path.cwd() / 'config' / 'setting.config')
 mongo_config = env_config['MongoDB']
 QUARTER_INDEX = -16
 

@@ -1,5 +1,6 @@
 import logging
 import datetime
+from pathlib import Path
 
 def initiateLogger(origin, level):
     '''Initiate a logger with given logging level and logging origin
@@ -15,7 +16,12 @@ def initiateLogger(origin, level):
     '''
 
     try:
-        logging.basicConfig(filename = '../log/' + 
+        curr_path_splitted = str(Path.cwd()).split('/')
+        if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
+            root_name = '../log/'
+        else:
+            root_name = 'log/'
+        logging.basicConfig(filename = root_name + 
                 str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log', 
                 level=level, 
                 format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

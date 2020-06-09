@@ -5,24 +5,22 @@ This module tests the correctness and exceptions of InsertData/inser_data()
 
 
 import sys
-sys.path.append("../src")
-import os
-##sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))))
+sys.path.append('./src')
 from configparser import ConfigParser
 from pathlib import Path
-import InsertData
-import ReadCourseData
+from InsertData import check_file_open, insert_data, get_db
+from ReadCourseData import from_raw_to_list
 
 env_config = ConfigParser()
-env_config.read(Path('..') / 'config' / 'setting.config')
+env_config.read(Path.cwd() / 'config' / 'setting.config')
 mongo_config = env_config['MongoDB']
 
 def test_insert_data_correctness():
     """Test if insert_data() returns the right content."""
-    course_raw_data = InsertData.check_file_open('test.json')
-    course_list, department_list = ReadCourseData.from_raw_to_list(course_raw_data, 'Test Data')
-    InsertData.insert_data(course_list, department_list, 'Test Data')
-    db = InsertData.get_db()
+    course_raw_data = check_file_open('tests/test.json')
+    course_list, department_list = from_raw_to_list(course_raw_data, 'Test Data')
+    insert_data(course_list, department_list, 'Test Data')
+    db = get_db()
     assert (db['Test Data courses'].find_one({'crn': '32072'})) is not None
     assert (db['Test Data courses'].find_one({'crn': '35071'})) is not None
     assert (db['Test Data courses'].find_one({'crn': '31138'})) is not None

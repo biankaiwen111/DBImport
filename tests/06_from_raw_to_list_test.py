@@ -5,18 +5,16 @@ This module tests the correctness and exceptions of ReadCourseData/from_raw_to_l
 
 
 import sys
-sys.path.append("../src")
-import os
-##sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))))
-import ReadCourseData
-import InsertData
+sys.path.append('./src')
+from ReadCourseData import from_raw_to_list
+from InsertData import check_file_open
 import pytest
 
 def test_from_raw_to_list_correctness():
     """Test if from_raw_to_list() returns the right content."""
-    course_raw = InsertData.check_file_open("test.json")
+    course_raw = check_file_open('tests/test.json')
     quarter_name = 'Test Data'
-    course_list, department_list = ReadCourseData.from_raw_to_list(course_raw, quarter_name)
+    course_list, department_list = from_raw_to_list(course_raw, quarter_name)
     assert len(course_list) == 6
     assert len(department_list) == 2
     assert course_list[5].UID == department_list[1].courses[2].UID == '35528'
@@ -43,14 +41,14 @@ def test_from_raw_to_list_correctness():
 def test_from_raw_to_list_with_invalid_quarter_name():
     """Test if from_raw_to_list() throws the right exception if the quarter name is invalid."""
     with pytest.raises(KeyError):
-        course_raw = InsertData.check_file_open("test.json")
+        course_raw = check_file_open('tests/test.json')
         quarter_name = 'Invalid quarter name'
-        course_list, department_list = ReadCourseData.from_raw_to_list(course_raw, quarter_name)
+        course_list, department_list = from_raw_to_list(course_raw, quarter_name)
 
 
 def test_from_raw_to_list_with_invalid_file():
     """Test if from_raw_to_list() throws the right exception if the json file is invalid."""
     with pytest.raises(FileNotFoundError):
-        course_raw = InsertData.check_file_open("nonexistent.json")
+        course_raw = check_file_open('tests/nonexistent.json')
         quarter_name = 'Test Data'
-        course_list, department_list = ReadCourseData.from_raw_to_list(course_raw, quarter_name)
+        course_list, department_list = from_raw_to_list(course_raw, quarter_name)
