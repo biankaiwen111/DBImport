@@ -5,20 +5,18 @@ This module tests the correctness and exceptions of ReadCourseData/read_course_p
 
 
 import sys
-sys.path.append("../src")
-import os
-##sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))))
-import ReadCourseData
-import InsertData
+sys.path.append('./src')
+from ReadCourseData import read_course_proto
+from InsertData import check_file_open
 import pytest
 
 def test_read_course_proto_correctness():
     """Test if read_course_proto() returns the right content with/without lab."""
-    course_raw_data = InsertData.check_file_open('test.json')
+    course_raw_data = check_file_open('tests/test.json')
     json_obj = course_raw_data['Test Data']
     course_list = []
     department_name = 'ACCT'
-    each_department = ReadCourseData.read_course_proto(json_obj, course_list, department_name)
+    each_department = read_course_proto(json_obj, course_list, department_name)
     assert each_department.deptName == 'ACCT'
     assert len(each_department.courses) == 3
     assert each_department.courses[2].UID == course_list[2].UID == '31138'

@@ -4,19 +4,17 @@ This module tests the correctness and exceptions of ReadCourseData/read_lab_time
 """
 
 import sys
-sys.path.append("../src")
-import os
-##sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))))
-import InsertData
-import ReadCourseData
+sys.path.append('./src')
+from InsertData import check_file_open
+from ReadCourseData import read_lab_time
 import course_pb2 as course
 
 def test_read_lab_time_correctness_lab():
     """Test if read_lab_time() returns the right content if the course has a lab."""
-    file_obj = InsertData.check_file_open("test_lab.json")
-    each_course = file_obj["Test Data"]["CourseData"]["ACCT"][0]
+    file_obj = check_file_open('tests/test_lab.json')
+    each_course = file_obj['Test Data']['CourseData']['ACCT'][0]
     temp_course = course.Course()
-    temp_course = ReadCourseData.read_lab_time(each_course, temp_course)
+    temp_course = read_lab_time(each_course, temp_course)
     assert len(temp_course.lab) == 1
     assert temp_course.lab[0].UID == 'L'
     assert temp_course.lab[0].days == ''
@@ -29,8 +27,8 @@ def test_read_lab_time_correctness_lab():
 
 def test_read_lab_time_correctness_nolab():
     """Test if read_lab_time() returns the right content if the course has no lab."""
-    file_obj = InsertData.check_file_open("test_lab.json")
-    each_course = file_obj["Test Data"]["CourseData"]["ACCT"][1]
+    file_obj = check_file_open('tests/test_lab.json')
+    each_course = file_obj['Test Data']['CourseData']['ACCT'][1]
     temp_course = course.Course()
-    temp_course = ReadCourseData.read_lab_time(each_course, temp_course)
+    temp_course = read_lab_time(each_course, temp_course)
     assert len(temp_course.lab) == 0
