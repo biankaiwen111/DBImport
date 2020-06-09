@@ -27,5 +27,3 @@ def test_insert_data_correctness():
     assert (db['Test Data departments'].find_one({'deptName': 'ADMJ'})) is not None
     assert len(db['Test Data departments'].find_one({'deptName': 'ACCT'})['courses']) == 3
     assert len(db['Test Data departments'].find_one({'deptName': 'ADMJ'})['courses']) == 3
-    
-
