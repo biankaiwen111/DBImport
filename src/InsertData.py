@@ -22,6 +22,7 @@ env_config.read(Path('..') / 'config' / 'setting.config')
 mongo_config = env_config['MongoDB']
 QUARTER_INDEX = -16
 
+
 def get_db():
     """Get MongoDB username and password from the config file and return the desired database.
 
