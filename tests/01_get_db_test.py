@@ -17,6 +17,7 @@ def test_get_db_existence():
     db = InsertData.get_db()
     assert isinstance(db, pymongo.database.Database)
 
+
 @pytest.mark.skip(reason = "Mongoclient does not throw any exceptions or errors currently")
 def test_get_db_with_worong_username():
     """
@@ -25,6 +26,7 @@ def test_get_db_with_worong_username():
     mongo_config['Mongo_User'] = 'WrongUserName'
     with pytest.raises(Exception):
         db = InsertData.get_db()
+
 
 @pytest.mark.skip(reason = "Mongoclient does not throw any exceptions or errors currently")
 def test_get_db_with_worong_password():

@@ -12,6 +12,7 @@ def test_check_file_open_existence_and_correctness():
 	assert isinstance(result, dict)
 	assert result
 
+
 def test_check_file_open_not_exist():
 	"""
     Test if check_file_open() handles correctly with a nonexistent file
