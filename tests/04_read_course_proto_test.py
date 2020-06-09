@@ -1,13 +1,19 @@
+"""Test read_course_proto.
+
+This module tests the correctness and exceptions of ReadCourseData/read_course_proto()
+"""
+
+
 import sys
 sys.path.append("../src")
+import os
+##sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))))
 import ReadCourseData
 import InsertData
 import pytest
 
 def test_read_course_proto_correctness():
-    """
-    Test if read_course_proto() returns the right content with/without lab
-    """
+    """Test if read_course_proto() returns the right content with/without lab."""
     course_raw_data = InsertData.check_file_open('test.json')
     json_obj = course_raw_data['Test Data']
     course_list = []

@@ -1,5 +1,13 @@
+"""Test inser_data.
+
+This module tests the correctness and exceptions of InsertData/inser_data()
+"""
+
+
 import sys
 sys.path.append("../src")
+import os
+##sys.path.append((os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))))
 from configparser import ConfigParser
 from pathlib import Path
 import InsertData
@@ -10,9 +18,7 @@ env_config.read(Path('..') / 'config' / 'setting.config')
 mongo_config = env_config['MongoDB']
 
 def test_insert_data_correctness():
-    """
-    Test if insert_data() returns the right content
-    """
+    """Test if insert_data() returns the right content."""
     course_raw_data = InsertData.check_file_open('test.json')
     course_list, department_list = ReadCourseData.from_raw_to_list(course_raw_data, 'Test Data')
     InsertData.insert_data(course_list, department_list, 'Test Data')
