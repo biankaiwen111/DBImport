@@ -19,12 +19,16 @@ def initiateLogger(origin, level):
         curr_path_splitted = str(Path.cwd()).split('/')
         if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
             root_name = '../log/'
-        else:
+        elif Path('log').exists():
             root_name = 'log/'
+        else:
+            raise FileNotFoundError('Invalid working directory')
         logging.basicConfig(filename = root_name + 
                 str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log', 
                 level=level, 
                 format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    except FileNotFoundError:
+        raise
     except:
         raise KeyError("Invalid logger level")
     return logging.getLogger(__name__)

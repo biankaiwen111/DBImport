@@ -17,13 +17,23 @@ from pymongo import errors as mongoerrors
 from pathlib import Path
 
 logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
-env_config = ConfigParser()
-curr_path_splitted = str(Path.cwd()).split('/')
-if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
-    env_config.read(Path('..') / 'config' / 'setting.config')
-else:
-    env_config.read(Path.cwd() / 'config' / 'setting.config')
-mongo_config = env_config['MongoDB']
+try:
+    env_config = ConfigParser()
+    curr_path_splitted = str(Path.cwd()).split('/')
+    if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
+        env_config.read(Path('..') / 'config' / 'setting.config')
+    elif Path('config').exists():
+        env_config.read(Path.cwd() / 'config' / 'setting.config')
+    else:
+        raise FileNotFoundError('Invalid working directory')
+    mongo_config = env_config['MongoDB']
+except FileNotFoundError:
+    raise
+except:
+    raise KeyError('Invalid index: MongoDB')
+
+
+
 QUARTER_INDEX = -16
 
 
@@ -95,13 +105,27 @@ def main():
     With the help of other functions, this main function could read the data from
     JSON files and put them into desired databases.
     """
+<<<<<<< HEAD
     logger.info('InsertData.py Excecution Started.')
     config = ConfigParser()
     config.read(Path('..') / 'config' / env_config['Config']['Config_File_Name'])
     path = config['locations']['path']
     year = int(config['data_info']['start_year'])
 
+=======
+>>>>>>> c357462... fix: fix logical errors in src and change the structure of tests
     try:
+        logger.info('InsertData.py Excecution Started.')
+        config = ConfigParser()
+        if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
+            path = Path('..')
+        elif Path('config').exists():
+            path = Path()
+        else:
+            raise FileNotFoundError('Invalid working directory')
+        config.read(path / 'config' / env_config['Config']['Config_File_Name'])
+        path = config['locations']['path']
+        year = int(config['data_info']['start_year'])
         while config['locations'][str(year)]:
             all_quarters_in_year = config['locations'][str(year)].split(',')
             for each_quarter in all_quarters_in_year:
@@ -115,7 +139,8 @@ def main():
         logger.error('MongoDB error has occurred')
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
-    logger.info('InsertData.py Excecution Finished.')
+    finally:
+        logger.info('InsertData.py Excecution Finished.')
 
 
 if __name__ == "__main__":
