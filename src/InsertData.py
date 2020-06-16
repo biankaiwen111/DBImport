@@ -6,9 +6,7 @@ and inserts those data into the desired database
 """
 
 
-import os
-import json
-import FHDAlogger
+import os, json, FHDAlogger
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
 from configparser import ConfigParser
