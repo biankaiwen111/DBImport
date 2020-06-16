@@ -1,5 +1,4 @@
-import logging
-import datetime
+import logging, datetime
 
 def initiateLogger(origin, level):
     '''Initiate a logger with given logging level and logging origin
