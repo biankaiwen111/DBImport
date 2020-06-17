@@ -5,8 +5,7 @@ This module helps the runner to read course data from json files and return
 lists of Course and Department objects for databse insertion
 """
 
-import json
-import os
+import json, os
 import course_pb2 as course
 import instructor_pb2 as instructor
 import department_pb2 as department
