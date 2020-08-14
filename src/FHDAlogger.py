@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import logging
-import datetime
 from pathlib import Path
-=======
 import logging, datetime
->>>>>>> 486ea0d... style: combine import statements
 
 def initiateLogger(origin, level):
     '''Initiate a logger with given logging level and logging origin
