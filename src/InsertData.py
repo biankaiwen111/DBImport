@@ -30,8 +30,6 @@ except FileNotFoundError:
 except:
     raise KeyError('Invalid index: MongoDB')
 
-
-
 QUARTER_INDEX = -16
 
 
@@ -103,15 +101,6 @@ def main():
     With the help of other functions, this main function could read the data from
     JSON files and put them into desired databases.
     """
-<<<<<<< HEAD
-    logger.info('InsertData.py Excecution Started.')
-    config = ConfigParser()
-    config.read(Path('..') / 'config' / env_config['Config']['Config_File_Name'])
-    path = config['locations']['path']
-    year = int(config['data_info']['start_year'])
-
-=======
->>>>>>> c357462... fix: fix logical errors in src and change the structure of tests
     try:
         logger.info('InsertData.py Excecution Started.')
         config = ConfigParser()
