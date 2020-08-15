@@ -13,17 +13,17 @@ from configparser import ConfigParser
 from pymongo import MongoClient
 from pymongo import errors as mongoerrors
 from pathlib import Path
+from dotenv import load_dotenv
+
+##read env variable
+load_dotenv()
+setting_config = os.getenv('config_setting_path')
+filepaths_config = os.getenv('config_filepath_path')
 
 logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
 try:
     env_config = ConfigParser()
-    curr_path_splitted = str(Path.cwd()).split('/')
-    if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
-        env_config.read(Path('..') / 'config' / 'setting.config')
-    elif Path('config').exists():
-        env_config.read(Path.cwd() / 'config' / 'setting.config')
-    else:
-        raise FileNotFoundError('Invalid working directory')
+    env_config.read(setting_config)
     mongo_config = env_config['MongoDB']
 except FileNotFoundError:
     raise
@@ -102,15 +102,10 @@ def main():
     JSON files and put them into desired databases.
     """
     try:
+        print("start upload...")
         logger.info('InsertData.py Excecution Started.')
         config = ConfigParser()
-        if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
-            path = Path('..')
-        elif Path('config').exists():
-            path = Path()
-        else:
-            raise FileNotFoundError('Invalid working directory')
-        config.read(path / 'config' / env_config['Config']['Config_File_Name'])
+        config.read(filepaths_config)
         path = config['locations']['path']
         year = int(config['data_info']['start_year'])
         while config['locations'][str(year)]:

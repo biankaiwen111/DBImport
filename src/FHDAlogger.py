@@ -1,5 +1,5 @@
-from pathlib import Path
-import logging, datetime
+from dotenv import load_dotenv
+import logging, datetime, os
 
 def initiateLogger(origin, level):
     '''Initiate a logger with given logging level and logging origin
@@ -15,19 +15,16 @@ def initiateLogger(origin, level):
     '''
 
     try:
-        curr_path_splitted = str(Path.cwd()).split('/')
-        if curr_path_splitted[len(curr_path_splitted) - 1] == 'src':
-            root_name = '../log/'
-        elif Path('log').exists():
-            root_name = 'log/'
+        load_dotenv()
+        root_name = os.getenv('log_path')
+        if root_name == None: ##when env variable is undefined we print it to stdout
+            logInfo = str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin
+            print("log: {0}".format(logInfo))
         else:
-            raise FileNotFoundError('Invalid working directory')
-        logging.basicConfig(filename = root_name + 
-                str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log', 
-                level=level, 
-                format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    except FileNotFoundError:
-        raise
+            logging.basicConfig(filename = root_name +
+                    str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log',
+                    level=level,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     except:
         raise KeyError("Invalid logger level")
     return logging.getLogger(__name__)
